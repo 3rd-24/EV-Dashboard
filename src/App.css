@@ -118,6 +118,7 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
 .mono-value small { font-size: 0.62em; color: var(--dim); font-weight: 400; margin-left: 3px; }
 .mono-value.violet { color: var(--violet); }
 .mono-value.amber { color: var(--amber); }
+.mono-value.mint { color: var(--mint); }
 
 /* --- Driver inputs --- */
 .input-row { display: flex; align-items: center; gap: 12px; }
@@ -145,9 +146,9 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
 .gauge-track { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 9; stroke-linecap: round; }
 .gauge-fill { fill: none; stroke: url(#gaugeGrad); stroke-width: 9; stroke-linecap: round; filter: drop-shadow(0 0 6px rgba(79,224,184,0.45)); }
 .gauge-dot { fill: #fff; filter: drop-shadow(0 0 4px rgba(255,255,255,0.8)); }
-.tick-major { stroke: rgba(255,255,255,0.35); stroke-width: 1.6; }
+.tick-major { stroke: rgba(255,255,255,0.4); stroke-width: 1.8; }
 .tick-minor { stroke: rgba(255,255,255,0.15); stroke-width: 1; }
-.tick-label { font-family: var(--font-mono); font-size: 7px; fill: var(--dim); }
+.tick-label { font-family: var(--font-mono); font-size: 8px; font-weight: 600; fill: var(--dim); }
 
 .gauge-center {
   position: absolute; inset: 0;
@@ -172,18 +173,6 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
 .legend-dot.mint { background: var(--mint); }
 .legend-dot.amber { background: var(--amber); margin-left: 10px; }
 
-/* --- Trip stats --- */
-.trip-grid { align-items: start; }
-
-/* --- Tire pressure --- */
-.tire-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin-top: 10px; }
-.tire-cell {
-  display: flex; flex-direction: column; align-items: center; gap: 4px;
-  padding: 8px 4px; background: rgba(255,255,255,0.03); border-radius: 6px;
-}
-.tire-pos { font-family: var(--font-mono); font-size: 0.62rem; color: var(--dim); font-weight: 600; }
-.tire-val { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700; color: var(--ink); }
-
 /* --- Drive mode / regen --- */
 .drive-card { width: 100%; margin-top: 6px; }
 .drive-modes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 12px; }
@@ -200,6 +189,15 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
 .regen-track { display: flex; gap: 6px; margin-top: 14px; }
 .regen-seg { flex: 1; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.12); transition: background 0.3s ease; }
 .regen-seg.on { background: var(--violet); box-shadow: 0 0 6px rgba(155,140,255,0.5); }
+
+/* --- Tire pressure --- */
+.tire-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin-top: 10px; }
+.tire-cell {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 8px 4px; background: rgba(255,255,255,0.03); border-radius: 6px;
+}
+.tire-pos { font-family: var(--font-mono); font-size: 0.62rem; color: var(--dim); font-weight: 600; }
+.tire-val { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700; color: var(--ink); }
 
 /* --- Powertrain systems status --- */
 .sys-grid { display: flex; flex-direction: column; gap: 10px; }
@@ -230,6 +228,9 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
   padding: 2px 8px; border-radius: 4px; border: 1px solid; letter-spacing: 0.03em;
 }
 .mod-temp { font-family: var(--font-mono); font-weight: 700; font-size: clamp(1.3rem, 1.8vw, 1.6rem); margin-top: 10px; }
+
+/* --- Trip stats --- */
+.trip-grid { align-items: start; }
 
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
 @media (prefers-reduced-motion: reduce) {
