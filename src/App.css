@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body, #root { width: 100vw; height: 100vh; overflow: hidden; max-width: none !important; }
+
+/* บังคับหน้าเว็บให้สูงเท่าจอ 100% พอดีเป๊ะ และลดฟอนต์ตั้งต้นลงนิดหน่อยเพื่อให้สัดส่วนพอดี */
+html, body, #root { width: 100%; height: 100vh; max-width: none !important; overflow: hidden; font-size: 18px; }
+body { background-color: var(--bg); color: var(--ink); font-family: var(--font-ui); }
 
 :root {
   --bg: #0a0d13;
@@ -18,16 +21,17 @@ html, body, #root { width: 100vw; height: 100vh; overflow: hidden; max-width: no
   --font-ui: 'Inter', sans-serif;
 }
 
-body { background-color: var(--bg); color: var(--ink); font-family: var(--font-ui); }
-
+/* จัด Layout หลักเป็นแบบ Flex Column */
 .ev-root {
   background: radial-gradient(120% 100% at 50% -10%, #10151f 0%, var(--bg) 55%);
   color: var(--ink);
   font-family: var(--font-ui);
-  min-height: 100vh;
+  height: 100vh; 
   width: 100%;
-  padding: clamp(16px, 2.4vw, 30px) clamp(16px, 3vw, 40px);
+  padding: 1.5vh 1.5vw;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .ev-root::before {
   content: '';
@@ -44,9 +48,10 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
   position: relative;
   display: flex; justify-content: space-between; align-items: center;
   gap: 16px; flex-wrap: wrap;
-  padding-bottom: clamp(14px, 1.6vw, 20px);
+  padding-bottom: 1vh;
   border-bottom: 1px solid var(--line);
-  margin-bottom: clamp(18px, 2vw, 26px);
+  margin-bottom: 1.5vh;
+  flex-shrink: 0; /* ป้องกันไม่ให้ส่วนหัวโดนบีบ */
 }
 .brand { display: flex; align-items: center; gap: 14px; }
 .logo {
@@ -77,14 +82,16 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1.35fr 1fr;
-  gap: clamp(18px, 2.4vw, 32px);
-  align-items: start;
+  gap: 1.5vw;
+  align-items: stretch;
+  flex: 1; 
+  min-height: 0; /* ป้องกันการล้นหน้าจอ */
 }
 @media (max-width: 880px) {
-  .grid { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: 1fr; overflow-y: auto; }
 }
 
-.col { display: flex; flex-direction: column; gap: 14px; }
+.col { display: flex; flex-direction: column; gap: 1.2vh; height: 100%; justify-content: space-between; }
 .section-title {
   display: flex; align-items: center; gap: 6px;
   font-size: 0.7rem; color: var(--dim); font-weight: 600;
@@ -94,7 +101,7 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
 /* --- Cards --- */
 .card {
   background: var(--panel); border: 1px solid var(--line);
-  border-radius: 10px; padding: 16px 18px;
+  border-radius: 10px; padding: 1.2vh 1.2vw;
 }
 .card.highlight { border-color: rgba(79,224,184,0.28); background: rgba(79,224,184,0.03); }
 .row-between { display: flex; justify-content: space-between; align-items: baseline; }
@@ -103,18 +110,18 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
   font-size: 0.72rem; color: var(--dim); font-weight: 600;
   letter-spacing: 0.05em; text-transform: uppercase;
 }
-.big { font-family: var(--font-mono); font-weight: 700; font-size: clamp(1.6rem, 2.2vw, 2rem); }
+.big { font-family: var(--font-mono); font-weight: 700; font-size: clamp(1.4rem, 2vw, 2rem); }
 .mint { color: var(--mint); }
-.sub { font-family: var(--font-mono); color: var(--dim); font-size: 0.72rem; margin-top: 12px; }
+.sub { font-family: var(--font-mono); color: var(--dim); font-size: 0.72rem; margin-top: 1vh; }
 
-.bar { width: 100%; height: 6px; background: rgba(255,255,255,0.07); border-radius: 4px; overflow: hidden; margin-top: 10px; }
-.bar.thin { height: 4px; margin-top: 8px; }
+.bar { width: 100%; height: 6px; background: rgba(255,255,255,0.07); border-radius: 4px; overflow: hidden; margin-top: 1vh; }
+.bar.thin { height: 4px; margin-top: 0.8vh; }
 .bar-fill { height: 100%; background: var(--mint); transition: width 0.3s ease; }
 
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
 .card.mini { text-align: left; }
-.mono-value { font-family: var(--font-mono); font-weight: 700; font-size: clamp(1.15rem, 1.6vw, 1.45rem); margin-top: 6px; }
+.mono-value { font-family: var(--font-mono); font-weight: 700; font-size: clamp(1.15rem, 1.6vw, 1.45rem); margin-top: 0.6vh; }
 .mono-value small { font-size: 0.62em; color: var(--dim); font-weight: 400; margin-left: 3px; }
 .mono-value.violet { color: var(--violet); }
 .mono-value.amber { color: var(--amber); }
@@ -122,7 +129,7 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
 
 /* --- Driver inputs --- */
 .input-row { display: flex; align-items: center; gap: 12px; }
-.input-row + .input-row { margin-top: 16px; }
+.input-row + .input-row { margin-top: 1.2vh; }
 .input-label { font-size: 0.7rem; font-weight: 600; color: var(--dim); width: 62px; letter-spacing: 0.03em; }
 .input-bg { flex: 1; height: 5px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; }
 .input-fill { height: 100%; border-radius: 3px; transition: width 0.3s ease; }
@@ -131,7 +138,7 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
 .input-val { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; width: 42px; text-align: right; }
 
 /* --- Center gauge --- */
-.center-col { align-items: center; }
+.center-col { align-items: center; justify-content: center; }
 .mode-pill {
   font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
   padding: 6px 16px; border-radius: 20px; border: 1px solid var(--line);
@@ -141,7 +148,7 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
 .mode-regen { color: var(--violet); border-color: rgba(155,140,255,0.4); background: rgba(155,140,255,0.08); animation: pulse 1.4s ease-in-out infinite; }
 .mode-parked { color: var(--dim); }
 
-.gauge-wrap { position: relative; width: min(340px, 90%); aspect-ratio: 1; margin-top: 14px; }
+.gauge-wrap { position: relative; width: min(32vh, 260px, 90%); aspect-ratio: 1; margin-top: 1vh; }
 .gauge-svg { width: 100%; height: 100%; }
 .gauge-track { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 9; stroke-linecap: round; }
 .gauge-fill { fill: none; stroke: url(#gaugeGrad); stroke-width: 9; stroke-linecap: round; filter: drop-shadow(0 0 6px rgba(79,224,184,0.45)); }
@@ -154,16 +161,16 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
   position: absolute; inset: 0;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
-.speed-number { font-family: var(--font-display); font-weight: 700; font-size: clamp(3rem, 6vw, 4.6rem); line-height: 0.9; letter-spacing: -0.02em; }
-.speed-unit { font-family: var(--font-mono); color: var(--mint); font-size: 0.75rem; letter-spacing: 0.15em; margin-top: 6px; }
+.speed-number { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 7vh, 3.4rem); line-height: 0.9; letter-spacing: -0.02em; }
+.speed-unit { font-family: var(--font-mono); color: var(--mint); font-size: 0.75rem; letter-spacing: 0.15em; margin-top: 4px; }
 
-.dynamics { display: flex; align-items: center; gap: 28px; margin-top: 14px; }
+.dynamics { display: flex; align-items: center; gap: 28px; margin-top: 1.5vh; }
 .dyn-box { text-align: center; }
 .divider { width: 1px; height: 32px; background: var(--line); }
 
 /* --- Trend chart --- */
-.chart-card { width: 100%; margin-top: 6px; }
-.chart-svg { width: 100%; height: 92px; margin-top: 10px; display: block; }
+.chart-card { width: 100%; margin-top: 0; }
+.chart-svg { width: 100%; height: clamp(40px, 8vh, 74px); margin-top: 1vh; display: block; }
 .chart-gridline { stroke: rgba(255,255,255,0.06); stroke-width: 1; }
 .chart-line { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .chart-line-speed { stroke: var(--mint); }
@@ -174,11 +181,11 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
 .legend-dot.amber { background: var(--amber); margin-left: 10px; }
 
 /* --- Drive mode / regen --- */
-.drive-card { width: 100%; margin-top: 6px; }
-.drive-modes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 12px; }
+.drive-card { width: 100%; margin-top: 0; }
+.drive-modes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 1vh; }
 .mode-btn {
   font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
-  padding: 8px 0; border-radius: 6px; border: 1px solid var(--line);
+  padding: 0.8vh 0; border-radius: 6px; border: 1px solid var(--line);
   background: transparent; color: var(--dim); cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -186,21 +193,21 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
 .mode-btn.active { color: var(--mint); border-color: rgba(79,224,184,0.5); background: rgba(79,224,184,0.08); }
 .mode-btn:focus-visible { outline: 2px solid var(--mint); outline-offset: 2px; }
 
-.regen-track { display: flex; gap: 6px; margin-top: 14px; }
+.regen-track { display: flex; gap: 6px; margin-top: 1vh; }
 .regen-seg { flex: 1; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.12); transition: background 0.3s ease; }
 .regen-seg.on { background: var(--violet); box-shadow: 0 0 6px rgba(155,140,255,0.5); }
 
 /* --- Tire pressure --- */
-.tire-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin-top: 10px; }
+.tire-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin-top: 1vh; }
 .tire-cell {
-  display: flex; flex-direction: column; align-items: center; gap: 4px;
-  padding: 8px 4px; background: rgba(255,255,255,0.03); border-radius: 6px;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 0.8vh 4px; background: rgba(255,255,255,0.03); border-radius: 6px;
 }
 .tire-pos { font-family: var(--font-mono); font-size: 0.62rem; color: var(--dim); font-weight: 600; }
 .tire-val { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700; color: var(--ink); }
 
 /* --- Powertrain systems status --- */
-.sys-grid { display: flex; flex-direction: column; gap: 10px; }
+.sys-grid { display: flex; flex-direction: column; gap: 1vh; }
 .sys-row {
   display: flex; justify-content: space-between; align-items: center;
   font-family: var(--font-mono); font-size: 0.75rem;
@@ -209,8 +216,8 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
 .sys-ok { color: var(--mint); font-weight: 600; }
 
 /* --- System log --- */
-.log-card { width: 100%; margin-top: 6px; }
-.log-list { display: flex; flex-direction: column; gap: 10px; max-height: 168px; overflow-y: auto; }
+.log-card { width: 100%; margin-top: 0; }
+.log-list { display: flex; flex-direction: column; gap: 8px; max-height: 12vh; overflow-y: auto; }
 .log-item { display: flex; align-items: baseline; gap: 8px; font-family: var(--font-mono); font-size: 0.72rem; }
 .log-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; align-self: center; }
 .log-ok { background: var(--mint); }
@@ -220,14 +227,14 @@ body { background-color: var(--bg); color: var(--ink); font-family: var(--font-u
 .log-text { color: var(--ink); }
 
 /* --- STM32 grid --- */
-.stm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1vh; }
 .card.stm { border-width: 1px; }
 .mod-name { font-family: var(--font-mono); font-size: 0.68rem; color: var(--dim); font-weight: 600; }
 .pill {
   font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700;
   padding: 2px 8px; border-radius: 4px; border: 1px solid; letter-spacing: 0.03em;
 }
-.mod-temp { font-family: var(--font-mono); font-weight: 700; font-size: clamp(1.3rem, 1.8vw, 1.6rem); margin-top: 10px; }
+.mod-temp { font-family: var(--font-mono); font-weight: 700; font-size: clamp(1.15rem, 1.6vw, 1.5rem); margin-top: 1vh; }
 
 /* --- Trip stats --- */
 .trip-grid { align-items: start; }
